@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>Task_2</title>
+        <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+
+    <body>
+
+
+
+        <div id="root"></div>
+        <script type="text/babel">
+            //  Задача 2. Вводиться номер місяця. Автоматично виводити рекомендований одяг (зима – пальто, літо – шорти ….). Також автоматично виводити зображення з відповідним зображенням лісу (зима – ліс зі снігом, осінь – жовтий ліс, …).
+
+            function WeatherContent({ text, imgSrc, style }) {
+                return (
+                    <div>
+                        <p>{text}</p>
+                        <img src={imgSrc} style={style} alt="Image" />
+                    </div>
+                )
+            }
+
+            function WeatherManager() {
+                const [cloth, setCloth] = React.useState({
+                    value: '',
+                    text: '',
+                    imgSrc: "",
+                })
+                const seasonData = [
+                    {
+                        value: [6, 7, 8],
+                        text: "Шорти",
+                        imgSrc: 'https://uainfo.org/static/ckef/img/1_15913.jpg'
+                    },
+                    {
+                        value: [9, 10, 11],
+                        text: "Пальто",
+                        imgSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPNo09HWIdZLI7ZmjdwmuoPHFC5LiDP2P1bQ&s'
+                    },
+                    {
+                        value: [1, 2, 12],
+                        text: "Тепла шапка",
+                        imgSrc: 'https://content.skyscnr.com/m/30c17f9542f75237/original/GettyImages-148199249.jpg?resize=1224%3Aauto'
+                    },
+                    {
+                        value: [3, 4, 5],
+                        text: "Куртка",
+                        imgSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa_WKLQAXFyUjFF-5hQv4JI6kt585gl_f_sw&s'
+                    },
+                ]
+                function getImage() {
+                    return cloth.imgSrc ? cloth.imgSrc : 'https://www.rbc.ua/static/ckef2/img/29770e061b0afd354cb250bf1452d091_1.jpg'
+                }
+
+                function getSeason(weatherName) {
+                    return seasonData.find(ele => ele.value.some(num => num === weatherName));
+
+                }
+                function handlerInput(e) {
+                    const currentWeather = parseInt(e.target.value)
+
+                    const season = getSeason(currentWeather)
+
+                    setCloth({ ...season })
+
+                }
+
+                return (
+                    <div>
+                        <label>
+                            Введіть пору року
+                            <input
+                                type="number"
+                                onChange={handlerInput}
+                                required
+                            />
+                        </label>
+
+                        <WeatherContent text={cloth.text} imgSrc={getImage()} style={
+                            { width: "200px" }
+                        } />
+                    </div>
+                )
+            }
+
+            const root = ReactDOM.createRoot(document.getElementById('root'))
+            root.render(<WeatherManager />)
+        </script>
+    </body>
+
+</html>

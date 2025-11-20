@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>Task_4</title>
+        <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+
+    <body>
+
+
+
+        <div id="root"></div>
+        <script type="text/babel">
+            // Задача 4. “Рахунок у банку”
+            // Вимоги:
+            // 1) Спочатку сума дорівнює 0грн. Змінити суму у гривнях можна або зарахуванням на рахунок, або зняттям.
+            // 2) Сума автоматично переводиться у долари та євро (фіксований курс задається у data).
+            // 3) можливість зарахувати суму (контролювати, щоб не була від’ємною)
+            // 4) можливість зняти (щоб не можна зняти більше ніж є на рахунку)
+            // 5) при виконанні зняття і зарахування коштів вираховувати 3% від суми (відображати кількість відсотків автоматично)
+
+            // При зміні суми :
+            // - якщо було зняття, то суму відображати червоним
+            // - якщо було зарахування, то суму відображати зеленим
+            // Якщо сума валюти менша за 100 то відображати червоним кольором, інакше - зеленим
+
+
+            function TextComp({ text, value, styleProps }) {
+                return (
+                    <p>{text} : <span > {value} </span></p>
+                )
+            }
+            function ErrorComp({ text, styleProps }) {
+                return (<p
+                    style={styleProps}>{text}</p>)
+            }
+
+            function ATMComp() {
+                const [inputs, setInputs] = React.useState({
+                    add: null,
+                    withdraw: null
+                })
+                const [account, setAccount] = React.useState({
+                    uan: 0,
+                    usd: 0,
+                    eur: 0,
+                    tax: 0
+                })
+
+                const [errorObj, setErrorObj] = React.useState({
+                    text: "",
+                    status: false
+                })
+
+                const data = {
+                    USD: 42,
+                    EUR: 49,
+                    TAX: 3
+                }
+
+
+                function convertTo() {
+                    setAccount((prev) => ({
+                        ...prev,
+                        usd: prev.uan / data.USD,
+                        eur: prev.uan / data.EUR
+                    }))
+                }
+
+                const isError = () => {
+                    setErrorObj(prev => ({
+                        ...prev,
+                        status: true
+                    }))
+
+                    setTimeout(() => {
+                        setErrorObj({
+                            text: "",
+                            status: false
+                        })
+                        clearInputs()
+                    }, 3000)
+                }
+
+                function clearInputs() {
+                    setInputs({ add: null, withdraw: null })
+                }
+
+                function checkAccount(amount, type) {
+                    if (!amount || amount <= 0) {
+                        setErrorObj(prev => ({
+                            ...prev,
+                            text: 'Сумма має бути більше 0'
+                        }));
+                        isError();
+                        return false;
+                    }
+
+                    if (type === "withdraw" && amount > account.uan) {
+                        setErrorObj(prev => ({
+                            ...prev,
+                            text: 'Ви не можете зняти більше поточної суми'
+                        }));
+                        isError();
+                        return false;
+                    }
+
+                    return true;
+                }
+
+
+                function getAmountWithTax(amount) {
+                    setAccount((prev) => ({
+                        ...prev,
+                        tax: amount * (data.TAX / 100)
+                    }))
+                    return (amount - account.tax)
+                }
+
+
+                function onAddMoney() {
+                    if (!checkAccount(inputs.add, 'add')) return;
+
+                    const currentAmount = getAmountWithTax(inputs.add);
+
+                    setAccount(prev => ({
+                        ...prev,
+                        uan: prev.uan + currentAmount,
+                    }));
+
+                    convertTo();
+                    clearInputs();
+                }
+
+                function onWithdrawMoney() {
+                    if (!checkAccount(inputs.withdraw, 'withdraw')) return;
+
+                    const currentAmount = getAmountWithTax(inputs.withdraw);
+
+                    setAccount(prev => ({
+                        ...prev,
+                        uan: prev.uan - currentAmount,
+                    }));
+
+                    convertTo();
+                    clearInputs();
+                }
+
+
+                return (
+                    <div>
+                        <TextComp text="Сума на рахунку" value={account.uan.toFixed(2)} />
+                        <label>
+                            Зарахувати на рахунку
+                            <input type="number" onChange={(e) => inputs.add = parseFloat(e.target.value)} />
+                            <button onClick={onAddMoney} disabled={errorObj.status} >Зарахувати</button>
+                        </label>
+                        <br />
+                        <br />
+                        <label>
+                            Зняти з рахунку
+                            <input type="number" onChange={(e) => inputs.withdraw = parseFloat(e.target.value)} />
+                            <button onClick={onWithdrawMoney} disabled={errorObj.status} >Зняти</button>
+                        </label>
+                        <TextComp text='Відсоток за обслуговування' value={account.tax.toFixed(2)} />
+                        <hr />
+                        <TextComp text='Сума у доларах ' value={account.usd.toFixed(2)} />
+                        <TextComp text='Сума у євро ' value={account.eur.toFixed(2)} />
+                        <ErrorComp text={errorObj.text} style={{ opacity: errorObj.status ? 1 : 0 }} styleProps={{ color: "red" }} />
+                    </div>
+                )
+            }
+
+            const root = ReactDOM.createRoot(document.getElementById('root'))
+            root.render(<ATMComp />)
+        </script>
+    </body>
+
+</html>

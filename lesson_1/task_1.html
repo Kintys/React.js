@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>Task_1</title>
+        <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+
+    <body>
+
+
+
+        <div id="root"></div>
+        <script type="text/babel">
+            // ====================================
+            // Задача 1. Вводиться кількість пасажирів. Вивести:
+            // скільки потрібно автобусів (кожен автобус на 20 місць)
+            // скільки пляшок води (кожному пасажиру 2 пляшки)
+            // скільки бутербродів (кожному пасажиру 3 бутерброди)
+
+            function SpanText({ text, count }) {
+                return (
+                    <p>{text} <span>{count}</span></p>
+                )
+            }
+
+
+            function BusForm() {
+                const [bus, setBus] = React.useState(0)
+                const [bottleOfWater, setBottleOfWater] = React.useState(0)
+                const [sandwiches, setSandwiches] = React.useState(0)
+
+
+                function handlerInput(e) {
+                    const currentPassage = e.target.value
+
+
+                    const busNumber = Math.ceil(currentPassage / 20)
+                    const bottleOfWaterNumber = Math.floor(currentPassage * 2)
+                    const sandwichesNumber = Math.floor(currentPassage * 3)
+
+
+                    setBus(busNumber)
+                    setBottleOfWater(bottleOfWaterNumber)
+                    setSandwiches(sandwichesNumber)
+                }
+
+
+                return (
+                    <div>
+                        <label>
+                            Введіть кілкість пасажирів!
+                            <input
+                                type="number"
+                                onChange={handlerInput}
+                                required
+                            />
+                        </label>
+                        <SpanText text="Потрібна кількість автобувів" count={bus} />
+                        <SpanText text="Потрібна пляшок води" count={bottleOfWater} />
+                        <SpanText text="Потрібна бутербродів" count={sandwiches} />
+                    </div>
+                )
+            }
+
+            const root = ReactDOM.createRoot(document.getElementById('root'))
+            root.render(<BusForm />)
+        </script>
+    </body>
+
+</html>

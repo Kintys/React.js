@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>Task_5</title>
+        <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+
+    <body>
+
+
+
+        <div id="root"></div>
+        <script type="text/babel">
+            //    Задача 5. Додаток містить масив об’єктів (логін, пароль) --  існуючі логіни і паролі. Користувач вводить логін і пароль, а програма при натисненні на кнопку повідомляє чи може користувач бути авторизованим.
+
+
+            const userList = [{
+                userName: 'admin',
+                password: 'admin'
+            },
+            {
+                userName: 'user',
+                password: 'user'
+            }]
+
+            class API {
+                static getUserList(key) {
+                    if (!key) throw new Error('This key incorrect!')
+                    return JSON.parse(localStorage.getItem(key))
+                }
+
+                static setUserLits(userList) {
+                    if (!userList && !Array.isArray(userList)) throw new Error('User list incorrect!')
+                    localStorage.setItem('data', JSON.stringify(userList))
+                }
+            }
+
+            API.setUserLits(userList)
+
+            function ErrorComp({ text, styleProps }) {
+                return (<p
+                    style={styleProps}> {text} </p>)
+            }
+
+            function LoginComp() {
+                const [errorObj, setErrorObj] = React.useState({
+                    text: "",
+                    status: false
+                })
+                const [inputs, setInputs] = React.useState({
+                    userName: null,
+                    password: null
+                })
+
+                function clearInputs() {
+                    setInputs({
+                        userList: null,
+                        password: null
+                    })
+                }
+
+                const isError = () => {
+                    setErrorObj(prev => ({
+                        ...prev,
+                        status: true
+                    }))
+
+                    setTimeout(() => {
+                        setErrorObj({
+                            text: "",
+                            status: false
+                        })
+                    }, 2000)
+                }
+
+                function existUser({ userName, password }) {
+                    const api = API.getUserList('data')
+                    return api.some((user) => user.userName === userName && user.password === password)
+                }
+
+
+                function validate(userData) {
+                    if (!userData.userName || !userData.password) {
+                        setErrorObj((prevError) => ({
+                            ...prevError,
+                            text: "Введіть логін і пароль"
+                        }))
+                        isError()
+                        return false
+                    }
+
+
+                    if (!existUser(userData)) {
+                        setErrorObj((prevError) => ({
+                            ...prevError,
+                            text: "Невірний логін і пароль!"
+                        }))
+                        isError()
+                        return false
+                    }
+                    return true
+                }
+
+                function login() {
+                    const userData = {
+                        userName: inputs.userName,
+                        password: inputs.password
+                    }
+                    const isUser = validate(userData)
+                    if (isUser) {
+                        clearInputs()
+                        window.location.href = "../lesson_1/weclome.html";
+                    }
+                }
+
+                return (
+                    <div>
+                        <div>
+                            <b>Login: admin, Password: admin</b>
+                        </div>
+                        <br />
+                        <br />
+                        <label>
+                            Login
+                            <br />
+                            <input type="text" onChange={
+                                (e) => inputs.userName = e.target.value.toLowerCase()
+                            } />
+                        </label>
+                        <br />
+                        <label>
+                            Password
+                            <br />
+                            <input type="text" onChange={
+                                (e) => inputs.password = e.target.value.toLowerCase()
+                            } />
+                        </label>
+                        <br />
+                        <br />
+                        <button onClick={login} disabled={errorObj.status}>Sing in</button>
+                        <br />
+                        <ErrorComp text={errorObj.text} style={{ opacity: errorObj.status ? 1 : 0 }} styleProps={{ color: "red" }} />
+                    </div>
+                )
+
+            }
+
+            const root = ReactDOM.createRoot(document.getElementById('root'))
+            root.render(<LoginComp />)
+        </script>
+    </body>
+
+</html>
