@@ -1,0 +1,39 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 200px;
+}
+
+.input-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.table-block {
+    display: flex;
+    width: 700px;
+}
+
+.table {
+    border-collapse: collapse;
+    border: 1px solid #000;
+    margin-top: 16px;
+    width: 100%;
+}
+
+.title-cell {
+    border: 1px solid #000;
+    padding: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.cell {
+    border: 1px solid #000;
+    padding: 4px;
+}
+
+.cell-right {
+    text-align: right;
+}
