@@ -1,0 +1,48 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 5px;
+}
+
+.cell {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: transparent;
+}
+
+.open {
+    color: inherit;
+    background: transparent;
+}
+.close {
+    color: transparent;
+    background: gray;
+}
+
+.close {
+    color: transparent;
+    background: transparent;
+}
+.close::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: gray;
+    z-index: 2;
+}
+
+.cell > * {
+    position: relative;
+    z-index: 1;
+}
+
+.open::after {
+    content: none;
+}

@@ -1,0 +1,60 @@
+.message {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #2704044a;
+    border: 1px solid #eef6ff;
+    box-shadow: 0 1px 3px rgba(20, 20, 40, 0.03);
+    max-width: 400px;
+    margin-bottom: 10px;
+}
+
+.text {
+    margin: 0;
+    font-size: 14px;
+    color: white;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.like {
+    background: #657d96;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 13px;
+    min-width: 36px;
+    text-align: center;
+}
+
+.controls {
+    display: flex;
+    gap: 6px;
+}
+
+.btn {
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    background: #0c3e5b;
+    cursor: pointer;
+    font-size: 13px;
+    transition:
+        background 0.12s,
+        transform 0.06s;
+}
+
+.btn:hover {
+    background: #032c28;
+    transform: translateY(-1px);
+}
