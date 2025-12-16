@@ -37,7 +37,7 @@ function DataGrid({ data: products, loading, error }) {
     return (
         <>
             <div className={styles.container}>
-                <FilterPanel onSelect={setSortOpt} onEmit={setFilterValue} sortOptions={sortOptions} />
+                <FilterPanel onSelect={setSortOpt} onEmit={setFilterValue} selectOptions={sortOptions} />
                 {loading ? (
                     <Spinner />
                 ) : (
