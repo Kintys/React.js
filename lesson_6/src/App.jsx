@@ -1,15 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect } from 'react'
 import './App.css'
 import CalculatorComp from './task-1/CalculatorComp'
-
+import DataGrid from './task-2/DataGrid'
+import DeviceScreen from './task-3/DeviceScreen'
+import useFetch from './hooks/useFetch'
+import SearchComp from './task-4/SearchComp'
 function App() {
-    const [count, setCount] = useState(0)
+    let productObj = useFetch('/products')
 
     return (
         <>
-            <CalculatorComp />
+            <div className="body-wrapper">
+                <CalculatorComp />
+                <br />
+                <br />
+                <DataGrid {...productObj} />
+                <br />
+                <br />
+                <DeviceScreen />
+                <br />
+                <br />
+                <SearchComp {...productObj} />
+            </div>
         </>
     )
 }
