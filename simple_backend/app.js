@@ -5,7 +5,7 @@ const path = require('path')
 
 const app = express()
 const PORT = 5000
-const DELAY_MS = 1000 // Затримка в мілісекундах
+const DELAY_MS = 200 // Затримка в мілісекундах
 const PRODUCTS_FILE = path.join(__dirname, 'products.json')
 
 // Мідлвер для затримки
