@@ -8,7 +8,6 @@ import ErrorComp from '../ErrorComp'
 import pageLinks from '../../router/pageLinks'
 import { useNavigate } from 'react-router'
 import CartEmpty from './CartEmpty'
-import useFetch from '../../hooks/useFetch'
 
 function CartList() {
     const [productList, setProductList] = useState([])
@@ -17,8 +16,6 @@ function CartList() {
     const [values, setValues] = useLocalStorage('cart')
 
     const goTo = useNavigate()
-
-    const {} = useFetch(apiRoutes.getProductById())
 
     const getProductsById = async (id) => {
         const url = `${API_BASE_URL}${apiRoutes.getProductById(id)}`
