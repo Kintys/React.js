@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 
-// const API_BASE_URL = 'https://react-js-56p6.onrender.com/api'
-const API_BASE_URL = 'http://localhost:5000/api'
+const API_BASE_URL = 'https://react-js-56p6.onrender.com/api'
 
 function useFetch(urlPath, method = 'GET', body = null, { skip = false } = {}) {
     const [data, setData] = useState(null)

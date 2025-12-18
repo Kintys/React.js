@@ -41,7 +41,6 @@ function ProductForm() {
         if (product) {
             const { id, ...productWithoutId } = product
             setValues(productWithoutId)
-            goTo(pageLinks.admin)
         }
     }, [product, setValues])
 
@@ -54,7 +53,7 @@ function ProductForm() {
             } else {
                 await changeProduct.execute(values)
             }
-            // goTo(pageLinks.admin)
+            goTo(pageLinks.admin)
         } catch (err) {
             console.error(err)
         } finally {
