@@ -1,0 +1,27 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-height: 80px;
+    width: 100%;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.249);
+}
+
+.headerInner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    padding: 1rem 0;
+    gap: 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}

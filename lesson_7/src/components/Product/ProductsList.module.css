@@ -1,0 +1,47 @@
+.productsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 300px));
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem 0;
+}
+
+@media (max-width: 768px) {
+    .productsGrid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .productsGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+.addProductButton {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 2rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #0156ff 0%, #0142cc 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(1, 86, 255, 0.3);
+    display: block;
+}
+
+.addProductButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(1, 86, 255, 0.4);
+}
+
+.addProductButton:active {
+    transform: translateY(0);
+}
