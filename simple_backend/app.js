@@ -5,7 +5,7 @@ const path = require('path')
 
 const app = express()
 const PORT = 5000
-const DELAY_MS = 200 // Затримка в мілісекундах
+const DELAY_MS = 1000 // Затримка в мілісекундах
 const PRODUCTS_FILE = path.join(__dirname, 'products.json')
 
 // Мідлвер для затримки
@@ -43,6 +43,17 @@ app.get('/api/products', async (req, res) => {
   res.json(products)
 })
 
+// Отримання продукту за ID (НОВИЙ МАРШРУТ)
+app.get('/api/products/:id', async (req, res) => {
+  const id = parseInt(req.params.id)
+  const products = await readProducts()
+  const product = products.find((p) => p.id === id)
+  if (!product) {
+    return res.status(404).json({ error: 'Product not found' })
+  }
+  res.json(product)
+})
+
 // Пошук за назвою (частковий збіг)
 app.get('/api/products/search', async (req, res) => {
   const query = req.query.q ? req.query.q.toLowerCase() : ''
@@ -55,8 +66,8 @@ app.get('/api/products/search', async (req, res) => {
 
 // Додавання продукту
 app.post('/api/products', async (req, res) => {
-  const { name, price, imageUrl } = req.body
-  if (!name || !price || !imageUrl) {
+  const { name, price, imageUrl, oldPrice, description } = req.body
+  if (!name || !price || !imageUrl || !oldPrice || !description) {
     return res.status(400).json({ error: 'Missing required fields' })
   }
   const products = await readProducts()
@@ -64,7 +75,9 @@ app.post('/api/products', async (req, res) => {
     id: products.length ? Math.max(...products.map((p) => p.id)) + 1 : 1,
     name,
     price,
+    oldPrice,
     imageUrl,
+    description
   }
   products.push(newProduct)
   await writeProducts(products)
@@ -74,8 +87,8 @@ app.post('/api/products', async (req, res) => {
 // Оновлення продукту
 app.put('/api/products/:id', async (req, res) => {
   const id = parseInt(req.params.id)
-  const { name, price, imageUrl } = req.body
-  if (!name || !price || !imageUrl) {
+  const { name, price, imageUrl, oldPrice, description } = req.body
+  if (!name || !price || !imageUrl || !oldPrice || !description) {
     return res.status(400).json({ error: 'Missing required fields' })
   }
   const products = await readProducts()
@@ -83,7 +96,7 @@ app.put('/api/products/:id', async (req, res) => {
   if (index === -1) {
     return res.status(404).json({ error: 'Product not found' })
   }
-  products[index] = { id, name, price, imageUrl }
+  products[index] = { id, name, price, imageUrl, oldPrice, description }
   await writeProducts(products)
   res.json(products[index])
 })
