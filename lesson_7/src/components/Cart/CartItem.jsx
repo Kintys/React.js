@@ -17,8 +17,8 @@ function CartItem({ product, index, onRemove }) {
             </div>
 
             <div className={styles.priceSection}>
-                <div className={styles.price}>{product.price?.toFixed(2)} ₴</div>
-                {product.oldPrice && <div className={styles.oldPrice}>{product.oldPrice?.toFixed(2)} ₴</div>}
+                <div className={styles.price}>{product.price} ₴</div>
+                {product.oldPrice && <div className={styles.oldPrice}>{product.oldPrice} ₴</div>}
             </div>
 
             <button className={styles.removeBtn} onClick={handleRemove}>

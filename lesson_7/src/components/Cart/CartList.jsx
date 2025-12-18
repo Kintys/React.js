@@ -47,6 +47,7 @@ function CartList() {
             setLoading(true)
             const promises = values.map((item) => getProductsById(item))
             const products = await Promise.all(promises)
+            console.log(products)
             setProductList(products.filter((p) => p !== null))
             setLoading(false)
         }
