@@ -11,8 +11,7 @@ function AdminButton({ id }) {
     const handleDelete = async () => {
         try {
             await deleteRequest.execute()
-            // Кращого не придумав як перезавантажити
-            window.location.reload()
+            goTo(pageLinks.home)
         } catch (err) {
             console.error(err)
         }
