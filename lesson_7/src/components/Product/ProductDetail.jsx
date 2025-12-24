@@ -4,19 +4,20 @@ import styles from './ProductDetail.module.css'
 import useFetch from '../../hooks/useFetch'
 import apiRoutes from '../../api/apiRoutes'
 import Spinner from '../Spinner/Spinner'
+import ErrorComp from '../ErrorComp'
 import pageLinks from '../../router/pageLinks'
 import useLocalStorage from '../../hooks/useLocalStorage'
 
 function ProductDetail() {
     const { id } = useParams()
     const { data: product, loading, error } = useFetch(apiRoutes.getProductById(id))
-    const [values, setValue] = useLocalStorage('cart')
+    const [cart, setCart] = useLocalStorage('cart', [])
 
     const goTo = useNavigate()
 
     const addToCart = () => {
         if (!id) return
-        setValue([...values, id])
+        setCart([...cart, id])
         goTo(pageLinks.productsList)
     }
 

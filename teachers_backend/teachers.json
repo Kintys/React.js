@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "name": "Олена Коваль",
+    "subject": "Математика/Фізика",
+    "photo": "https://cdn-icons-png.flaticon.com/512/168/168723.png"
+  },
+  {
+    "id": "2",
+    "name": "Іван Петренко",
+    "subject": "Фізика",
+    "photo": "https://cdn-icons-png.flaticon.com/512/168/168724.png"
+  },
+  {
+    "id": "3",
+    "name": "Наталія Сидорова",
+    "subject": "Історія",
+    "photo": "https://cdn-icons-png.flaticon.com/512/168/168725.png"
+  }
+]

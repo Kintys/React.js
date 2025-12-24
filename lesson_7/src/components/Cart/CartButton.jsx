@@ -1,17 +1,12 @@
 import { Link } from 'react-router'
 import useLocalStorage from '../../hooks/useLocalStorage'
-import { useEffect, useState } from 'react'
 import cartIcon from '../../assets/cart.svg'
 import pageLinks from '../../router/pageLinks'
 import styles from './CartButton.module.css'
 
 function CartButton() {
-    const [values] = useLocalStorage('cart')
-    const [cartCount, setCartCount] = useState(0)
-
-    useEffect(() => {
-        setCartCount(Array.isArray(values) ? values.length : 0)
-    }, [values])
+    const [values] = useLocalStorage('cart', [])
+    const cartCount = Array.isArray(values) ? values.length : 0
 
     return (
         <Link to={pageLinks.cart} className={styles.cartButton}>
