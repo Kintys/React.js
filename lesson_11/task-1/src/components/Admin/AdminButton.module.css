@@ -1,0 +1,33 @@
+.editButton {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    background: #0156ff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.editButton:hover {
+    background: #0142cc;
+}
+
+.deleteButton {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.deleteButton:hover {
+    background: #cc0000;
+}

@@ -1,0 +1,16 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow: hidden;
+    line-height: normal;
+    font-size: 16px;
+}
+
+.wrapper > main {
+    flex: 1 1 auto;
+}
+
+.wrapper > * {
+    min-width: 0;
+}

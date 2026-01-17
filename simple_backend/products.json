@@ -19,9 +19,9 @@
     "id": 3,
     "name": "Headphones",
     "price": 99.99,
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4gq2KfpsLjDAPXc2_9EzRQtR7LS4d3WwCCw&s",
     "oldPrice": 199.99,
-    "description": "Wireless noise-canceling headphones with premium sound quality.",
-    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4gq2KfpsLjDAPXc2_9EzRQtR7LS4d3WwCCw&s"
+    "description": "Wireless noise-canceling headphones with premium sound quality."
   },
   {
     "id": 4,

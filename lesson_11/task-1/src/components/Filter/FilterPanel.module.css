@@ -1,0 +1,67 @@
+.filterPanel {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+.filterGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 200px;
+    flex: 1;
+}
+
+.filterGroup label {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #495057;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filterGroup input,
+.filterGroup select {
+    padding: 0.625rem 0.875rem;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: #fff;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.filterGroup input:focus,
+.filterGroup select:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.filterGroup input::placeholder {
+    color: #adb5bd;
+}
+
+.filterGroup select {
+    cursor: pointer;
+}
+
+.filterGroup select:hover {
+    border-color: #adb5bd;
+}
+
+@media (max-width: 768px) {
+    .filterPanel {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .filterGroup {
+        min-width: 100%;
+    }
+}
