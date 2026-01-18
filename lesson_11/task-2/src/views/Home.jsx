@@ -4,7 +4,7 @@ function Home() {
     return (
         <>
             <Container>
-                <h1>Вітаємо у нашому магазині</h1>
+                <h1>Вітаємо</h1>
             </Container>
         </>
     )

@@ -1,6 +1,5 @@
 import { createBrowserRouter } from 'react-router'
 import { lazy } from 'react'
-import NotFoundPage from '@views/NotFoundPage'
 import Home from '@views/Home'
 import MasterPage from '@layout/MasterPage'
 import createPageLinks from '@routes/helper'
@@ -16,7 +15,7 @@ export const routes = [
     {
         path: '/',
         element: <MasterPage />,
-        errorElement: <NotFoundPage />,
+        errorElement: <LazyNotFoundPage />,
         handle: { title: 'home', navName: 'Головна', isShow: true },
         children: [
             {
@@ -52,11 +51,6 @@ export const routes = [
                 path: 'about',
                 element: <About />,
                 handle: { title: 'about', navName: 'Про Нас', isShow: true }
-            },
-            {
-                path: '*',
-                element: <LazyNotFoundPage />,
-                handle: { title: '404', isShow: false }
             }
         ]
     }

@@ -1,0 +1,49 @@
+.postItem {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 1px solid #e9ecef;
+}
+
+.postItem:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.postItem h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #212529;
+    font-weight: 600;
+    line-height: 1.4;
+    text-transform: capitalize;
+}
+
+.postItem p {
+    margin: 0;
+    color: #495057;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+@media (max-width: 768px) {
+    .postItem {
+        padding: 1.25rem;
+    }
+
+    .postItem h3 {
+        font-size: 1.125rem;
+    }
+
+    .postItem p {
+        font-size: 0.9rem;
+    }
+}

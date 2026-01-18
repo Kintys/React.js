@@ -1,13 +1,13 @@
 import Container from '@layout/Container/Container'
 
-function Home() {
+function About() {
     return (
         <>
             <Container>
-                <h1>Вітаємо у нашому магазині</h1>
+                <h1>Вчимо React</h1>
             </Container>
         </>
     )
 }
 
-export default Home
+export default About

@@ -1,13 +1,13 @@
 import Container from '@layout/Container/Container'
 
-function Home() {
+function Footer() {
     return (
         <>
             <Container>
-                <h1>Вітаємо у нашому магазині</h1>
+                <p style={{ padding: '30px' }}>Я у мами програміст &copy; 2025</p>
             </Container>
         </>
     )
 }
 
-export default Home
+export default Footer
