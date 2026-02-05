@@ -16,7 +16,7 @@ const app = express()
 // app.use(cors({ origin: 'http://localhost:5173/', credentials: true }))
 app.use(
   cors({
-    origin: ['http://localhost:5173', 'http://localhost:5174'], // ✅ фронтенд (Vite)
+    origin: ['http://localhost:5173', 'http://localhost:5174','https://lesson-17-abab.onrender.com'], // ✅ фронтенд (Vite)
     credentials: true, // ✅ дозвіл надсилати cookie
   })
 )
